@@ -38,12 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # Third party
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'bootstrap3',
 
     # Local apps
+    'accounts',
     'tracker',
-
-    # Third Party apps
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [

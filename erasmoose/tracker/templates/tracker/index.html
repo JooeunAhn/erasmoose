@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div id="map" style="width: 100%; height: 400px;"></div>
+</div>
+<div class="container">
+    <a href="{% url 'tracker:moose_create' %}"><button type="button" class="btn btn-primary">Add moose</button></a>
+    <ul>
+    {% for moose in moose_list %}
+        <li><a href="{% url 'tracker:moose_detail' moose.pk %}">{{moose}}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+<script>
+    var markers = [];
+    function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: {lat: 60.170771,lng: 24.938469}
+
+    });
+        {% for moose in moose_list %}
+            addMarker({{moose.lat}}, {{moose.lng}}, {{moose.pk}});
+        {% endfor %}
+    }
+
+    function addMarker(moose_lat, moose_lng, moose_pk){
+        var marker = new google.maps.Marker({
+            position: { lat : moose_lat, lng : moose_lng },
+            map: map
+    });
+        var content = "<a href='/tracker/"+moose_pk+"'>"+"Moose"+"</a>";
+        var infowindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker,'click',(function(marker,content,infowindow){
+            return function() {
+            infowindow.setContent(content);
+            infowindow.open(map,marker);
+            };
+    })(marker,content,infowindow));
+    markers.push(marker);
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADYOYuou2GuChlOV2Kn75Eizfnq11IQg4&callback=initMap"></script>
+{% endblock %}

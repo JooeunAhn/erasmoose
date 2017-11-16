@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load socialaccount %}
+
+
+{% block content %}
+    <style>
+        .btn-social {
+            position: relative;
+            padding-left: 44px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-facebook {
+            color: #fff;
+            background-color: #3b5998;
+            border-color: rgba(0,0,0,0.2);
+        }
+    </style>
+
+    <form action="" method="post" class="form">
+      {% csrf_token %}
+        {% get_providers as providers %}
+            {% for provider in providers %}
+                <a title="{{ provider.name }}" href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"
+                   class="btn btn-social btn-block btn-{{ provider.id }} ">
+                    <h4 style="text-align: center; text-transform: uppercase;">{{ provider.name }} Login</h4>
+                </a>
+        {% endfor %}
+    </form>
+{% endblock %}

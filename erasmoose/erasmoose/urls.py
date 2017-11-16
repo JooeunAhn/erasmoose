@@ -18,8 +18,14 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
+from tracker.views import index
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', index, name="index"),
+    url(r'^accounts/', include('accounts.urls', namespace="accounts")),
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^tracker/', include('tracker.urls', namespace="tracker")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
