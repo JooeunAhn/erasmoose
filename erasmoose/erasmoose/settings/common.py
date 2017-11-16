@@ -26,7 +26,7 @@ SECRET_KEY = 'v8c$5l6@y_efvt5gr$v#mkf@2__cl2q)_$nwv*6((=+$gfb%=e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -136,3 +136,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,"erasmoose","static")
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
