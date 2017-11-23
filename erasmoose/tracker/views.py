@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .forms import MooseForm
 from .models import Moose
@@ -9,6 +10,7 @@ def index(request):
     return render(request, 'tracker/index.html', {"moose_list": moose_list})
 
 
+@login_required
 def moose_create(request):
     if request.method == "POST":
         form = MooseForm(request.POST, request.FILES)
