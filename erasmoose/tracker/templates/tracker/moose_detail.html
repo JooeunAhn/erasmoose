@@ -6,11 +6,10 @@
     <div id="map" style="width: 100%; height: 400px;"></div>
 </div>
 
-<h2>LatLng: {{moose.latlng}}</h2>
 <h3>Description: {{moose.description}}</h3>
 <h3>seen_time: {{moose.created_at}}</h3>
 {% if moose.image %}
-<img src="{{moose.image.url}}">
+<img style="width: 500px;" src="{{moose.image.url}}">
 {% endif %}
 
 

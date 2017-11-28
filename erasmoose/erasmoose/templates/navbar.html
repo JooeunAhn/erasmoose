@@ -9,6 +9,12 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'index' %}">Home</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tracker:about_us' %}">About us</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tracker:stat' %}">Stat</a>
+      </li>
       {% if user.is_authenticated %}
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
