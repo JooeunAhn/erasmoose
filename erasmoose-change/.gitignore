@@ -1,8 +1,0 @@
-virtual-env
-secret.json
-static
-staticfiles
-media
-db.sqlite3
-*.pyc
-.idea
