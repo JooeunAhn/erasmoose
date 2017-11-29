@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-12">
+    <div id="map" style="width: 100%; height: 400px;"></div>
+</div>
+
+<h3>Description: {{moose.description}}</h3>
+<h3>seen_time: {{moose.created_at}}</h3>
+{% if moose.image %}
+<img style="width: 500px;" src="{{moose.image.url}}">
+{% endif %}
+
+
+<script>
+    var markers = [];
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: {lat: {{moose.lat}},lng: {{moose.lng}}}
+
+    });
+        addMarker({{moose.lat}}, {{moose.lng}}, {{moose.pk}});
+    }
+
+    function addMarker(moose_lat, moose_lng, moose_pk){
+        var marker = new google.maps.Marker({
+            position: { lat : moose_lat, lng : moose_lng },
+            map: map
+    });
+        var content = "<a href='/tracker/"+moose_pk+"'>"+"Moose"+"</a>";
+        var infowindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker,'click',(function(marker,content,infowindow){
+            return function() {
+            infowindow.setContent(content);
+            infowindow.open(map,marker);
+            };
+    })(marker,content,infowindow));
+    markers.push(marker);
+    }
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADYOYuou2GuChlOV2Kn75Eizfnq11IQg4&callback=initMap"></script>
+
+{% endblock %}
